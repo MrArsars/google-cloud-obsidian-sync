@@ -22,11 +22,6 @@ jobs:
           node-version: '18'
 
       - name: Install and Build
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Install and Build
         run: |
           npm install
           npm run build
