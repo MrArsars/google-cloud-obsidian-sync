@@ -1,0 +1,27 @@
+name: Release Plugin
+
+on:
+  push:
+    tags:
+      - "*" # Спрацьовує на будь-який тег, наприклад v1.0.1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install & Build
+        run: |
+          npm install
+          npm run build
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            main.js
+            manifest.json
+            styles.css
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
