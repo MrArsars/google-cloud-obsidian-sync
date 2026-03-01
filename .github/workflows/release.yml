@@ -40,3 +40,13 @@ jobs:
             git commit -m "Auto-build: artifacts or config updated"
             git push origin master
           fi
+
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            main.js
+            manifest.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
