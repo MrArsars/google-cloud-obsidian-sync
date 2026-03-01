@@ -1,35 +1,44 @@
-import {App, PluginSettingTab, Setting} from "obsidian";
-import MyPlugin from "./main";
+import { App, PluginSettingTab, Setting } from "obsidian";
+import GCSSyncPlugin from "./main";
 
-export interface MyPluginSettings {
-	mySetting: string;
+export interface GCSSyncSettings {
+	bucketName: string;
+	serviceAccountKey: string;
 }
 
-export const DEFAULT_SETTINGS: MyPluginSettings = {
-	mySetting: 'default'
+export const DEFAULT_SETTINGS: GCSSyncSettings = {
+	bucketName: '',
+	serviceAccountKey: ''
 }
 
-export class SampleSettingTab extends PluginSettingTab {
-	plugin: MyPlugin;
+export class GCSSyncSettingTab extends PluginSettingTab {
+	plugin: GCSSyncPlugin;
 
-	constructor(app: App, plugin: MyPlugin) {
+	constructor(app: App, plugin: GCSSyncPlugin) {
 		super(app, plugin);
 		this.plugin = plugin;
 	}
 
 	display(): void {
-		const {containerEl} = this;
-
+		const { containerEl } = this;
 		containerEl.empty();
 
 		new Setting(containerEl)
-			.setName('Settings #1')
-			.setDesc('It\'s a secret')
+			.setName('GCS Bucket Name')
 			.addText(text => text
-				.setPlaceholder('Enter your secret')
-				.setValue(this.plugin.settings.mySetting)
+				.setValue(this.plugin.settings.bucketName)
 				.onChange(async (value) => {
-					this.plugin.settings.mySetting = value;
+					this.plugin.settings.bucketName = value;
+					await this.plugin.saveSettings();
+				}));
+
+		new Setting(containerEl)
+			.setName('Service Account JSON')
+			.setDesc('private JSON Google Cloud key')
+			.addTextArea(text => text
+				.setValue(this.plugin.settings.serviceAccountKey)
+				.onChange(async (value) => {
+					this.plugin.settings.serviceAccountKey = value;
 					await this.plugin.saveSettings();
 				}));
 	}
