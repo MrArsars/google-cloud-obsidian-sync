@@ -112,4 +112,22 @@ export class GCSClient {
             return "";
         }
     }
+
+    async listFiles(): Promise<string[]> {
+        const token = await this.getAccessToken();
+        const url = `https://storage.googleapis.com/storage/v1/b/${this.settings.bucketName}/o`;
+
+        const response = await requestUrl({
+            url: url,
+            method: 'GET',
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (response.status !== 200) {
+            console.error("Не вдалося отримати список файлів:", response.text);
+            return [];
+        }
+
+        return response.json.items ? response.json.items.map((item: any) => item.name) : [];
+    }
 }

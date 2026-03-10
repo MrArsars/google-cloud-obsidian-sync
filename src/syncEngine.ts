@@ -10,10 +10,32 @@ export class SyncEngine {
     }
 
     async syncAll() {
-        const files = this.app.vault.getFiles();
-        for (const file of files) {
+        const cloudFiles = await this.client.listFiles();
+
+        const localFiles = this.app.vault.getFiles();
+        const localPaths = new Set(localFiles.map(f => f.path));
+
+        for (const cloudPath of cloudFiles) {
+            if (!localPaths.has(cloudPath)) {
+                console.log(`📥 Новий файл у хмарі: ${cloudPath}. Завантажуємо...`);
+                await this.downloadNewFile(cloudPath);
+            }
+        }
+
+        for (const file of localFiles) {
             if (file.path.startsWith('.obsidian')) continue;
             await this.syncFile(file);
+        }
+    }
+
+    private async downloadNewFile(path: string) {
+        const data = await this.client.download(path);
+        if (data) {
+            const folderPath = path.split('/').slice(0, -1).join('/');
+            if (folderPath && !(await this.app.vault.adapter.exists(folderPath))) {
+                await this.app.vault.createFolder(folderPath);
+            }
+            await this.app.vault.createBinary(path, data);
         }
     }
 
