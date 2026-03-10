@@ -113,9 +113,9 @@ export class GCSClient {
         }
     }
 
-    async listFiles(): Promise<string[]> {
+    async listFiles(): Promise<any[]> {
         const token = await this.getAccessToken();
-        const url = `https://storage.googleapis.com/storage/v1/b/${this.settings.bucketName}/o`;
+        const url = `https://storage.googleapis.com/storage/v1/b/${this.settings.bucketName}/o?fields=items(name,metadata,etag)`;
 
         const response = await requestUrl({
             url: url,
@@ -129,5 +129,26 @@ export class GCSClient {
         }
 
         return response.json.items ? response.json.items.map((item: any) => item.name) : [];
+    }
+
+    async markAsDeleted(filePath: string) {
+        const token = await this.getAccessToken();
+        const url = `https://storage.googleapis.com/storage/v1/b/${this.settings.bucketName}/o/${encodeURIComponent(filePath)}`;
+
+        const response = await requestUrl({
+            url: url,
+            method: 'PATCH',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                metadata: { deleted: 'true' }
+            })
+        });
+
+        if (response.status !== 200) {
+            console.error("Помилка при позначенні файлу як видаленого:", response.text);
+        }
     }
 }
