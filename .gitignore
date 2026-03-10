@@ -17,9 +17,7 @@ node_modules
 
 # obsidian
 data.json
+sync-index.json
 
 # Exclude macOS Finder (System Explorer) View States
 .DS_Store
-
-s
-sync-index.json
