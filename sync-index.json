@@ -1,0 +1,107 @@
+{
+  "Excalidraw/Drawing 2026-02-10 20.48.44.excalidraw.md": {
+    "localHash": "7eb0641834c37fbd864cb97d7991134a374c1498"
+  },
+  "Excalidraw/Project architecture (2).excalidraw": {
+    "localHash": "380bfec3459da6e6e577dd05c11842dc98828dd6"
+  },
+  "Excalidraw/Project architecture.excalidraw": {
+    "localHash": "437f693a31a18bb3f6ce51b09f55ab0073702ead"
+  },
+  "Literature/Authors/Грег Маккеон.md": {
+    "localHash": "ea6df864ac171fa542108ec82e2099ea33d53dec"
+  },
+  "Literature/Authors/Джим Коллінз.md": {
+    "localHash": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+  },
+  "Literature/Books/Без зусиль.md": {
+    "localHash": "3caeb8b1cf0991e7a01f2c1147a8c33f7f794a30"
+  },
+  "Literature/Books/Від хорошого до величного.md": {
+    "localHash": "360ed84f9c1f9b20c739345e243bc27302f4cae1"
+  },
+  "Literature/Books/Есенціалізм.md": {
+    "localHash": "3df49ef676df85bc06e77753a2799b08087aafaa"
+  },
+  "Literature/Illustrative examples/Набута безпорадність.md": {
+    "localHash": "e5426946c9afd18dfcd6697fdcbe2362a854bf23"
+  },
+  "Literature/Own thoughts/Розуміння компанії.md": {
+    "localHash": "be10e89c3bc50b96566984b8b52d4c49632b84d7"
+  },
+  "Literature/Own thoughts/Як стати найкращим програмістом.md": {
+    "localHash": "5a96fbf88e85677093b8cdfb29f2036ea17d8eb9"
+  },
+  "Programming/Backend/Internet/Protocols/DHCP - Dynamic Host Configuration Protocol.md": {
+    "localHash": "e0aa6aeba621f2870e37adaedfe0da0de1052865"
+  },
+  "Programming/Backend/Internet/Protocols/DNS - Domain Name System.md": {
+    "localHash": "3604c2a3d7adf4cc2bdcdeee1aa30cb380a47dd3"
+  },
+  "Programming/Backend/Internet/Protocols/FTP - File Transfer Protocol.md": {
+    "localHash": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+  },
+  "Programming/Backend/Internet/Protocols/HTTP(S) - Hypertext Transfer Protocol (Secure).md": {
+    "localHash": "51aed380555aa13ce030f5f43d592c8c0a6b3beb"
+  },
+  "Programming/Backend/Internet/Protocols/IP - Internet Protocol.md": {
+    "localHash": "80597db8828770e4e6be65ae101f4661a6c6e2ca"
+  },
+  "Programming/Backend/Internet/Protocols/RFC - Request For Comments.md": {
+    "localHash": "cb2e8ed6694dbccc55d076c5535b6557396d7e3a"
+  },
+  "Programming/Backend/Internet/Protocols/SMTP - Simple Mail Transfer Protocol.md": {
+    "localHash": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+  },
+  "Programming/Backend/Internet/Protocols/SSL TLS - Secure Socket Layer Transport Layer Security.md": {
+    "localHash": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+  },
+  "Programming/Backend/Internet/Protocols/TCP - Transmission Control Protocol.md": {
+    "localHash": "9cb9b40ebf385fec699832a9a2c14ffd7a8acd3b"
+  },
+  "Programming/Backend/Internet/Protocols/UDP - User Datagram Protocol.md": {
+    "localHash": "d03f1535ab3acfcff91b490a0f74205de551dd51"
+  },
+  "Programming/Backend/Internet/Protocols/протоколи.md": {
+    "localHash": "83cda52f6a16b43b2504d5e30f82bb29852b1233"
+  },
+  "Programming/Backend/Internet/Інтернет.md": {
+    "localHash": "aa5dd1d06a0c93aa1546c0e2e285c0a314877d1f"
+  },
+  "Programming/Backend/Internet/мережа.md": {
+    "localHash": "43f0f647b96e90ab9d4f70abc6b4c0dd972895b8"
+  },
+  "_resources/DNS scheme.png": {
+    "localHash": "ce4e4f2d3dd456e322124255fb37802c05242c51"
+  },
+  "_resources/IP header.png": {
+    "localHash": "ba30448968b825dddcfe01ab55594717ac8607db"
+  },
+  "_resources/Routing diagram.png": {
+    "localHash": "f44e7ae8aa5f863e0b098dec40c77737a2f6971b"
+  },
+  "_resources/TCP IP packet data.png": {
+    "localHash": "de02ba9c8cc6be608d7c0226ea327540875a76db"
+  },
+  "_resources/TCP header.png": {
+    "localHash": "cf0072570779d4ade9cbb5ad510f3e470fc30a55"
+  },
+  "_resources/UDP header.png": {
+    "localHash": "2f694bb6cbfe04ee9f9ca99a93b34c341a705e99"
+  },
+  "_resources/network layers.png": {
+    "localHash": "fe0b814af2f458b2bdd167b73f300f091c68cd3c"
+  },
+  "_resources/postman google get response.png": {
+    "localHash": "4688eee951b9847b01c15b9c967b5099be150cb0"
+  },
+  "_resources/tracert cmd example.png": {
+    "localHash": "54e8852262e0df32258b727c5e5873fafab526f4"
+  },
+  "_resources/набута безпорадність.png": {
+    "localHash": "19c2000ac35818bb7f021ecb9f3d32b237637521"
+  },
+  "_resources/інтернет схема.png": {
+    "localHash": "f5b4e4a1f4e5e27ba5b050fcd356c665ccd743d9"
+  }
+}

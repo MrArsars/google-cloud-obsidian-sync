@@ -83,7 +83,7 @@ export class GCSClient {
                 aud: 'https://oauth2.googleapis.com/token',
                 exp: now + 3600,
                 iat: now,
-                scope: 'https://www.googleapis.com/auth/devstorage.read_write'
+                scope: 'https://www.googleapis.com/auth/devstorage.full_control'
             };
 
             const sHeader = JSON.stringify({ alg: 'RS256', typ: 'JWT' });
@@ -113,9 +113,10 @@ export class GCSClient {
         }
     }
 
-    async listFiles(): Promise<any[]> {
+    async listFilesMetadata(): Promise<any[]> {
         const token = await this.getAccessToken();
-        const url = `https://storage.googleapis.com/storage/v1/b/${this.settings.bucketName}/o?fields=items(name,metadata,etag)`;
+        // Додаємо fields, щоб отримати ім'я, метадані та дату оновлення
+        const url = `https://storage.googleapis.com/storage/v1/b/${this.settings.bucketName}/o?fields=items(name,updated,metadata)`;
 
         const response = await requestUrl({
             url: url,
@@ -123,32 +124,42 @@ export class GCSClient {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
-        if (response.status !== 200) {
-            console.error("Не вдалося отримати список файлів:", response.text);
-            return [];
-        }
-
-        return response.json.items ? response.json.items.map((item: any) => item.name) : [];
+        return response.json.items || [];
     }
 
     async markAsDeleted(filePath: string) {
         const token = await this.getAccessToken();
-        const url = `https://storage.googleapis.com/storage/v1/b/${this.settings.bucketName}/o/${encodeURIComponent(filePath)}`;
+        const encodedPath = encodeURIComponent(filePath);
+        const url = `https://storage.googleapis.com/storage/v1/b/${this.settings.bucketName}/o/${encodedPath}`;
 
-        const response = await requestUrl({
-            url: url,
-            method: 'PATCH',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                metadata: { deleted: 'true' }
-            })
-        });
+        try {
+            const response = await requestUrl({
+                url: url,
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    metadata: { deleted: 'true' }
+                })
+            });
 
-        if (response.status !== 200) {
-            console.error("Помилка при позначенні файлу як видаленого:", response.text);
+            console.log(`✅ Успішно позначено: ${filePath}`);
+            return response;
+        } catch (error: any) {
+            // Тепер ми ловимо помилку від requestUrl
+            console.error(`❌ Помилка GCS PATCH для ${filePath}:`);
+
+            // Спробуємо дістати текст помилки від Google
+            if (error.status) {
+                console.error(`Статус: ${error.status}`);
+                // Текст помилки часто лежить тут:
+                console.error(`Деталі:`, error.body || error.text || "Немає деталей");
+            } else {
+                console.error(error);
+            }
+            throw error; // Прокидаємо далі, щоб syncAll знав, що сталась біда
         }
     }
 }
