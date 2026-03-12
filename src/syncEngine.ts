@@ -20,7 +20,6 @@ export class SyncEngine {
             if (await this.app.vault.adapter.exists(this.indexPath)) {
                 const data = await this.app.vault.adapter.read(this.indexPath);
 
-                // Перевіряємо, чи файл не порожній
                 if (!data || data.trim().length === 0) {
                     return {};
                 }
@@ -29,7 +28,6 @@ export class SyncEngine {
             }
         } catch (e) {
             console.error("Помилка завантаження індексу (файл пошкоджено):", e);
-            // Якщо файл битий, краще повернути порожній об'єкт, щоб не блокувати роботу
             return {};
         }
         return {};
@@ -139,5 +137,25 @@ export class SyncEngine {
             }
         }
         return localHash;
+    }
+
+    async quickCheck(): Promise<boolean> {
+        const cloudFiles = await this.client.listFilesMetadata();
+        const index = await this.loadIndex();
+        const localFiles = this.app.vault.getFiles();
+
+        for (const cloud of cloudFiles) {
+            if (cloud.name.endsWith('/')) continue;
+            if (cloud.metadata?.deleted === 'true') continue;
+            const entry = index[cloud.name];
+            if (!entry || entry.localHash !== cloud.metadata?.localHash) return true;
+        }
+
+        for (const file of localFiles) {
+            if (file.path.startsWith('.obsidian')) continue;
+            if (!index[file.path]) return true;
+        }
+
+        return false;
     }
 }

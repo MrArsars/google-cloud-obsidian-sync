@@ -1,8 +1,22 @@
-/*
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.gcs-sync-spinning svg {
+    animation: spin 2s linear infinite;
+    color: var(--text-accent);
+}
 
-If your plugin does not need CSS, delete this file.
+.gcs-sync-error svg {
+    color: var(--text-error);
+}
 
-*/
+.mod-clickable:hover {
+    opacity: 0.8;
+    background-color: var(--background-modifier-hover);
+}
+
+.gcs-sync-pending:hover {
+    filter: brightness(1.2);
+}
